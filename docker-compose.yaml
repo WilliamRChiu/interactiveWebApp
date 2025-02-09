@@ -1,35 +1,28 @@
 services:
-  backend:
+  fastapi:
     build: ./backend
-    container_name: fastapi-backend
+    container_name: fastapi_backend
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/app
     env_file:
-      - .env
+      - ./backend/.env
     depends_on:
-      - database
-
-  frontend:
-    build: ./frontend
-    container_name: react-frontend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-    stdin_open: true
-    tty: true
-    depends_on:
-      - backend
-
-  database:
-    image: postgres:15
-    container_name: postgres-db
+      - db
+    restart: always
+  db:
+    image: postgres:13
+    container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: BlackSpeaker13
+      POSTGRES_PASSWORD: fastapi_db
+      POSTGRES_DB: w4chiu
     ports:
-      - "5432:5432"
+      - "6543:6543"
+    volumes:
+      - postgres_data:/var/lib/postgresql/postgres_data
+    
+volumes:
+  postgres_data:
