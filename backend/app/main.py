@@ -28,7 +28,6 @@ async def public_route():
     return {"message": "Public endpoint - no auth required"}
 
 
-# Ensure FastAPI starts correctly in Docker
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

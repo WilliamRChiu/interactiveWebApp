@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials
 
-cred = credentials.Certificate("backend/firebase_service_account.json")
+file_path = os.path.join(os.path.dirname(__file__), "firebase_service_account.json")
+cred = credentials.Certificate(file_path)
 firebase_admin.initialize_app(cred)
 load_dotenv()
 
