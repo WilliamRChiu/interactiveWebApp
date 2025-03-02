@@ -11,3 +11,12 @@ class Contact(_database.Base):
     email = _sql.Column(_sql.String, index = True, unique = True)
     phone_number = _sql.Column(_sql.String, index = True, unique=True)
     date_created = _sql.Column(_sql.DateTime, default = _dt.datetime.now)
+
+class Object(_database.Base):
+    __tablename__ = "objects"
+    id = _sql.Column(_sql.Integer, primary_key=True, index = True)
+    object_name = _sql.Column(_sql.String, index = True)
+    object_description = _sql.Column(_sql.String, index = True)
+    date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.now)
+    date_updated = _sql.Column(_sql.DateTime, default=_dt.datetime.now)
+    object_status = _sql.Column(_sql.Boolean, index=True)
