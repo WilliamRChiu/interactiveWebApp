@@ -20,3 +20,9 @@ class Object(_database.Base):
     date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.now)
     date_updated = _sql.Column(_sql.DateTime, default=_dt.datetime.now)
     object_status = _sql.Column(_sql.Boolean, index=True)
+
+class Player(_database.Base):
+    __tablename__ = "Player"
+    id = _sql.Column(_sql.Integer, primary_key=True, index = True)
+    username = _sql.Column(_sql.String, index = True)
+    InventoryID = _sql.Column(_sql.Integer, unique = True)
