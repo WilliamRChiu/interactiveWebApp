@@ -1,5 +1,6 @@
 import datetime as _dt
 import sqlalchemy as _sql
+from sqlalchemy.orm import relationship
 from ..database import database as _database
 
 
@@ -26,3 +27,22 @@ class Player(_database.Base):
     id = _sql.Column(_sql.Integer, primary_key=True, index = True)
     username = _sql.Column(_sql.String, index = True)
     inventoryid = _sql.Column(_sql.Integer, unique = True)
+
+class Items(_database.Base):
+    __tablename__ = "items"
+    id = _sql.Column(_sql.Integer, primary_key = True, index = True)
+    name = _sql.Column(_sql.String, nullable = False)
+    description = _sql.Column(_sql.String, nullable = True)
+    rarity = _sql.Column(_sql.String, nullable = False)
+
+
+
+class Inventory(_database.Base):
+    __tablename__ = "inventory"
+    id = _sql.Column(_sql.Integer, primary_key = True, index = True)
+    player_id = _sql.Column(_sql.Integer, _sql.ForeignKey("players.id"))
+    item_id = _sql.Column(_sql.Integer, _sql.ForeignKey("items.id"))
+    quantity = _sql.Column(_sql.Integer, default = 1)
+    player = relationship("Player", back_populates="inventory")
+    item = relationship("Items")
+    
