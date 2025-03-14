@@ -22,7 +22,7 @@ class Object(_database.Base):
     object_status = _sql.Column(_sql.Boolean, index=True)
 
 class Player(_database.Base):
-    __tablename__ = "Player"
+    __tablename__ = "players"
     id = _sql.Column(_sql.Integer, primary_key=True, index = True)
     username = _sql.Column(_sql.String, index = True)
-    InventoryID = _sql.Column(_sql.Integer, unique = True)
+    inventoryid = _sql.Column(_sql.Integer, unique = True)
